@@ -9,7 +9,7 @@ const {
 
 router.route('/').get(getAllProjects)
 router.route('/:id').get(getProjectById)
-router.route('/:id').delete(deleteProject)
+router.route('/id').delete(deleteProject)
 
 
 module.exports = router

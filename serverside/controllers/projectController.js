@@ -1,6 +1,5 @@
-import asyncHandler from 'express-async-handler';
-import Projects from '../models/projectModel';
-
+const asyncHandler = require('express-async-handler');
+const Projects = require ('../models/projectModel');
 
 //Method: Fetch all projects
 //Route: Get /api/projects
@@ -45,7 +44,7 @@ const deleteProject = asyncHandler(async(req, res) => {
 //Route: Get /api/projects
 //Access: Public 
 
-export {
+module.exports = {
     getAllProjects,
     getProjectById,
     deleteProject

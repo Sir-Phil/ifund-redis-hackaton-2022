@@ -1,18 +1,28 @@
 const express = require("express");
 const DBconnect = require("./config/db_config");
+const dotenv = require('dotenv');
 
+const projectRoutes = require('./routes/projectsRoutes')
+const movieRoutes = require('./routes/movieRoutes')
+const viewerRoutes = require('./routes/viewerRoutes')
 
 //DB activation
-DBconnect
-const appserv = express();
-appserv.use(express.json());
+DBconnect();
+dotenv.config();
+const server = express();
+
+
+server.use(express.json());
+server.use('/api/projects/', projectRoutes);
+server.use('/api/movies/', movieRoutes );
+server.use('/api/viewers', viewerRoutes)
 
 
 
-const PORT =process.env.PORT || 2022
+const port = process.env.PORT || 2022;
 
 //app listening to Database on port 2022
-appserv.listen(
-    PORT, () => 
-    console.log('Dedicated Port 2022 server runing...')
-)
+server.listen(
+    port, () => 
+    console.log(`Dedicated ${port} server running on ${process.env.NODE_ENV}...`)
+);

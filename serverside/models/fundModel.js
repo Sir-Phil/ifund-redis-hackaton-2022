@@ -1,5 +1,4 @@
-import mongoose from 'mongoose'
-
+const mongoose = require('mongoose')
 
 const fundSchema = mongoose.Schema(
     {
@@ -52,4 +51,4 @@ const fundSchema = mongoose.Schema(
 
 const Fund = mongoose.model('Fund', fundSchema)
 
-export default Fund
+module.exports = Fund
