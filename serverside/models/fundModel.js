@@ -11,6 +11,7 @@ const fundSchema = mongoose.Schema(
         fundItems: [
             {
                 name: {type: String, required: true },
+                amount: {type: Number, required: true},
                 project: {
                     type: mongoose.Schema.Types.ObjectId,
                     required: true,

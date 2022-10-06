@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 
 const projectRoutes = require('./routes/projectsRoutes')
 const movieRoutes = require('./routes/movieRoutes')
-const viewerRoutes = require('./routes/viewerRoutes')
+const userRoutes = require('./routes/userRoutes')
 
 //DB activation
 DBconnect();
@@ -15,7 +15,7 @@ const server = express();
 server.use(express.json());
 server.use('/api/projects/', projectRoutes);
 server.use('/api/movies/', movieRoutes );
-server.use('/api/viewers', viewerRoutes)
+server.use('/api/users', userRoutes)
 
 
 
