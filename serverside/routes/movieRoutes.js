@@ -5,9 +5,10 @@ const router = express.Router();
 
 
 
+
 router.route('/').get(getMovies).post(protect, admin, createMovie);
 router.route('/:id').get(getMovieById).delete(protect, admin, deleteMovie).put(protect, admin, upDateMovie);
-router.get('/top', getTopMovie)
+router.get('/top',getTopMovie);
 router.route('/:id/views').post(protect, createMovieReview)
 // router.route('/:id').delete(deleteMovie)
 // router.route('/').post(createMovie)

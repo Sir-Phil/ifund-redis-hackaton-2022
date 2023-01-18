@@ -1,18 +1,9 @@
 const mongoose = require('mongoose');
 
-const viewersSchema = new mongoose.Schema({
+const reviewerSchema = new mongoose.Schema({
     name: {
         type: String,
          required: true,
-    },
-    
-    weeklyMovieTarget: {
-        type: Number,
-        required: true,
-    },
-    totalMinutesWatch:{
-        type: Number,
-        required: true,
     },
    comment: {
     type: String,
@@ -33,7 +24,7 @@ const viewersSchema = new mongoose.Schema({
 }
 )
 
-const moviesSchema = new mongoose.Schema(
+const issueSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -48,19 +39,21 @@ const moviesSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        views: [viewersSchema],
-        numViews:{
-            type: Number,
-            required: true,
-            default: 0,
+        reviews: [reviewerSchema],
+        category: {
+            type: String,
+            required: true
         },
-        producer: {
+        supports: {
             type: String,
             required: true,
         },
-        releasedYear: {
+        description: {
             type: String,
-            required: true,
+            required: true
+        },
+        createdAt: {
+            type: Date,
         },
     },
     {
@@ -68,6 +61,6 @@ const moviesSchema = new mongoose.Schema(
     }
 )
 
-const Movies = mongoose.model('Movies', moviesSchema)
+const Issues = mongoose.model('Issues', issueSchema)
 
-module.exports = Movies
+module.exports = Issues

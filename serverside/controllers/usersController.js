@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const User = require('../models/usersModel');
 const { param } = require('../routes/movieRoutes');
-const generatorToken = require('../util/generatorToken');
+const generateToken = require('../util/generateToken');
 
 
 //Method: Auth user and get token
@@ -19,7 +19,7 @@ const authUser = asyncHandler(async(req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: generatorToken(user._id)
+            token: generateToken(user._id)
         })
     }else{
         res.status(401)
@@ -27,7 +27,7 @@ const authUser = asyncHandler(async(req, res) => {
     }
 })
 
-//Method: Create user
+//Method: Create a new user
 //Route: POST/api/user/
 //Access: Public
 const registerUser = asyncHandler(async(req, res) => {
@@ -51,7 +51,7 @@ const registerUser = asyncHandler(async(req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: generatorToken(user._id),
+            token: generateToken(user._id),
         })
     }else {
         res.status(400)
@@ -78,6 +78,9 @@ const getUserProfile = asyncHandler(async(req, res) => {
     }
 })
 
+//Method: Update user 
+//Routes: PUT/api/users/:id
+//Access Private/Admin
 const updateUserProfile = asyncHandler(async(req, res) => {
     const user = await User.findById(req.user._id)
 
@@ -95,7 +98,7 @@ const updateUserProfile = asyncHandler(async(req, res) => {
             name: updatedUser.name,
             email: updatedUser.email,
             isAdmin: updatedUser.isAdmin,
-            token: generatorToken(user._id),
+            token: generateToken(user._id),
         })
     }else {
         res.status(404)
@@ -106,7 +109,7 @@ const updateUserProfile = asyncHandler(async(req, res) => {
 
 //Method: Get all user
 //Route: Get/api/users 
-//Access: public
+//Access: Private/Admin
 
 const getUsers = asyncHandler(async(req, res) => {
     const users = await User.find({})
@@ -115,7 +118,7 @@ const getUsers = asyncHandler(async(req, res) => {
 
 //Method: Get single user
 //Route: Get/api/user/:id
-//Access: public
+//Access: Private/Admin
 
 const getUserById = asyncHandler(async(req, res) => {
     const user = await User.findById(req.params.id).select('-password');
